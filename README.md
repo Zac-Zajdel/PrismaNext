@@ -8,7 +8,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [Next PWA 5](https://www.npmjs.com/package/next-pwa) - Documentation of next pwa.
 - [Tailwind CSS 3](https://tailwindcss.com/docs/) - Documentation of tailwind css.
 - [Next PWA 5](https://www.npmjs.com/package/next-pwa) - Documentation of next pwa.
-- [Docker](https://docs.docker.com/) - Documentation of Docker.
 - [Eslint 7](https://eslint.org/docs/user-guide/getting-started) - Documentation of eslint.
 - [Prettier 2](https://prettier.io/docs/en/index.html) - Documentation of prettier.
 - [Husky 7](https://typicode.github.io/husky/#/) - Documentation of husky.
@@ -22,6 +21,9 @@ This project using node >= 12.13.0 & yarn
 
 ```bash
 git clone https://github.com/Zac-Zajdel/PrismaNext.git
+```
+
+```bash
 yarn install
 ```
 
@@ -60,22 +62,6 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-#### Docker Build
-
-```bash
-docker build -t PrismaNext .
-```
-
-#### Docker Run
-
-```bash
-docker run --rm -it -p 3000:3000 PrismaNext
-```
-
-#### Docker Compose
-
-```bash
-docker-compose up
 ```
 
 ## Learn More
@@ -96,3 +82,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ---
 
 Copyright © 2022 by Zac Zajdel
+```
