@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import Head from 'next/head'
-import { InferGetServerSidePropsType  } from 'next'
+import { InferGetServerSidePropsType } from 'next'
 import { User } from '../types/index'
 
-type inferServerSideProps = InferGetServerSidePropsType<typeof getServerSideProps>;
+type inferServerSideProps = InferGetServerSidePropsType<
+  typeof getServerSideProps
+>;
 
 const Homepage = (props: inferServerSideProps) => {
   return (
@@ -60,8 +62,8 @@ const Homepage = (props: inferServerSideProps) => {
         </p>
 
         <p className="text-xl text-center pt-6">
-          The first users name from your local database is: {' '}
-          <p className="pt-2 text-blue-600 text-2xl">{ props.user.name }</p>
+          The first users name from your local database is:{' '}
+          <p className="pt-2 text-blue-600 text-2xl">{props.user.name}</p>
         </p>
 
         <div className="flex flex-wrap justify-center items-center max-w-screen-md mt-12 sm:w-full">
@@ -145,7 +147,7 @@ export const getServerSideProps = async () => {
   const res = await fetch('http://localhost:3000/api/user')
   const user: User = await res.json()
 
-  return { 
+  return {
     props: { user },
   }
 }

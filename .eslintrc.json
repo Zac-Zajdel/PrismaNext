@@ -3,6 +3,7 @@
     "browser": true,
     "es2021": true
   },
+  "root": true,
   "extends": ["next", "prettier"],
   "rules": {
     "import/extensions": 0,

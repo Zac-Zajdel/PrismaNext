@@ -15,7 +15,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Usage
 
-This project using node >= 12.13.0 & yarn
+This project using node >= 16.14.2 & yarn
 
 ### Installation
 
