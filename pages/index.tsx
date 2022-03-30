@@ -11,7 +11,7 @@ const Homepage = (props: inferServerSideProps) => {
   return (
     <div className="min-h-screen px-2 py-0 flex flex-col justify-center items-center">
       <Head>
-        <title>PrismaNext Landing PAge</title>
+        <title>PrismaNext Landing Page</title>
       </Head>
 
       <main className="px-0 py-20 flex flex-1 flex-col justify-center items-center">
