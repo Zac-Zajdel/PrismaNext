@@ -47,6 +47,18 @@ yarn prisma migrate dev --name init
 yarn dev
 ```
 
+Reset your database to generate your own migration:
+
+```bash
+yarn prisma migrate reset
+```
+
+If you change the seeder file, you can easily run the seeder with the following:
+
+```bash
+yarn prisma db seed
+```
+
 #### Production
 
 ```bash
