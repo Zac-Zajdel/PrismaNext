@@ -1,13 +1,11 @@
 import Image from 'next/image'
 import Head from 'next/head'
 import { InferGetServerSidePropsType } from 'next'
-import { User } from '../types/index'
+import { getUser } from './api/user'
 
-type inferServerSideProps = InferGetServerSidePropsType<
-  typeof getServerSideProps
->;
-
-const Homepage = (props: inferServerSideProps) => {
+const Homepage = ({
+  user,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div className="min-h-screen px-2 py-0 flex flex-col justify-center items-center">
       <Head>
@@ -54,17 +52,19 @@ const Homepage = (props: inferServerSideProps) => {
           </a>
         </h1>
 
-        <p className="text-xl text-center">
+        <span className="text-xl text-center">
           Get started by editing{' '}
           <code className="bg-gray-50 rounded-md p-3 text-base font-mono">
             pages/index.tsx
           </code>
-        </p>
+        </span>
 
-        <p className="text-xl text-center pt-6">
+        <span className="text-xl text-center pt-6">
           The first users name from your local database is:{' '}
-          <p className="pt-2 text-blue-600 text-2xl">{props.user.name}</p>
-        </p>
+          <span className="pt-2 text-blue-600 text-2xl">
+            {user?.name ?? 'No User'}
+          </span>
+        </span>
 
         <div className="flex flex-wrap justify-center items-center max-w-screen-md mt-12 sm:w-full">
           <a
@@ -74,9 +74,9 @@ const Homepage = (props: inferServerSideProps) => {
             className="w-72 flex-grow flex-shrink-0 m-4 p-5 text-left no-underline border border-gray-200 rounded-xl transition duration-500 ease-in-out transform hover:text-blue-600 hover:border-2 hover:border-blue-600 focus:text-blue-600 focus:border-blue-600 active:text-blue-600 active:border-blue-600"
           >
             <h3 className="mb-4 text-xl">Documentation &rarr;</h3>
-            <p className="text-xl">
+            <span className="text-xl">
               Find in-depth information about Next.js features and API.
-            </p>
+            </span>
           </a>
 
           <a
@@ -86,9 +86,9 @@ const Homepage = (props: inferServerSideProps) => {
             className="w-72 flex-grow flex-shrink-0 m-4 p-5 text-left no-underline border border-gray-200 rounded-xl transition duration-500 ease-in-out transform hover:text-blue-600 hover:border-2 hover:border-blue-600 focus:text-blue-600 focus:border-blue-600 active:text-blue-600 active:border-blue-600"
           >
             <h3 className="mb-4 text-xl">Learn &rarr;</h3>
-            <p className="text-xl">
+            <span className="text-xl">
               Learn about Next.js in an interactive course with quizzes!
-            </p>
+            </span>
           </a>
 
           <a
@@ -98,9 +98,9 @@ const Homepage = (props: inferServerSideProps) => {
             className="w-72 flex-grow flex-shrink-0 m-4 p-5 text-left no-underline border border-gray-200 rounded-xl transition duration-500 ease-in-out transform hover:text-blue-600 hover:border-2 hover:border-blue-600 focus:text-blue-600 focus:border-blue-600 active:text-blue-600 active:border-blue-600"
           >
             <h3 className="mb-4 text-xl">Examples &rarr;</h3>
-            <p className="text-xl">
+            <span className="text-xl">
               Discover and deploy boilerplate example Next.js projects.
-            </p>
+            </span>
           </a>
 
           <a
@@ -110,9 +110,9 @@ const Homepage = (props: inferServerSideProps) => {
             className="w-72 flex-grow flex-shrink-0 m-4 p-5 text-left no-underline border border-gray-200 rounded-xl transition duration-500 ease-in-out transform hover:text-blue-600 hover:border-2 hover:border-blue-600 focus:text-blue-600 focus:border-blue-600 active:text-blue-600 active:border-blue-600"
           >
             <h3 className="mb-4 text-xl">Deploy &rarr;</h3>
-            <p className="text-xl">
+            <span className="text-xl">
               Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+            </span>
           </a>
         </div>
       </main>
@@ -144,9 +144,7 @@ const Homepage = (props: inferServerSideProps) => {
  * @returns User
  */
 export const getServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/user')
-  const user: User = await res.json()
-
+  const user = await getUser()
   return {
     props: { user },
   }
