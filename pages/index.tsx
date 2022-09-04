@@ -110,7 +110,7 @@ const Homepage = ({
           >
             <h3 className="mb-4 text-xl">Tailwind CSS &rarr;</h3>
             <span className="text-xl">
-              A utility-first CSS framework to build modern websites
+              A utility-first CSS framework to build modern websites.
             </span>
           </a>
         </div>
