@@ -2,20 +2,18 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Features
 
-- [React.js 17](https://reactjs.org/blog/2020/10/20/react-v17.html) - Blog introduce react v17.0.
-- [Next.js 12](https://nextjs.org/blog/next-12) - Blog introduce next.js 12.
-- [Typescript 4](https://www.typescriptlang.org/) - Documentation of typescript.
-- [Next PWA 5](https://www.npmjs.com/package/next-pwa) - Documentation of next pwa.
-- [Tailwind CSS 3](https://tailwindcss.com/docs/) - Documentation of tailwind css.
-- [Next PWA 5](https://www.npmjs.com/package/next-pwa) - Documentation of next pwa.
-- [Eslint 7](https://eslint.org/docs/user-guide/getting-started) - Documentation of eslint.
-- [Prettier 2](https://prettier.io/docs/en/index.html) - Documentation of prettier.
-- [Husky 7](https://typicode.github.io/husky/#/) - Documentation of husky.
-- [Lint Staged 12](https://github.com/okonet/lint-staged) - Documentation of lint staged.
+- [React.js 18](https://reactjs.org) - Documentation of React.js
+- [Next.js 12](https://nextjs.org) - Documentation of Next.js
+- [Typescript 4](https://www.typescriptlang.org) - Documentation of TypeScript
+- [Tailwind CSS 3](https://tailwindcss.com/docs/) - Documentation of Tailwind CSS.
+- [ESLint 8](https://eslint.org/) - Documentation of ESLint.
+- [Prettier 2](https://prettier.io/docs/en/index.html) - Documentation of Prettier.
+- [Husky 8](https://typicode.github.io/husky/#/) - Documentation of Husky.
+- [Lint Staged 13](https://github.com/okonet/lint-staged) - Documentation of lint staged.
 
 ## Usage
 
-This project using node >= 16.14.2 & yarn
+This project using node >= 12.13.0 & yarn
 
 ### Installation
 
@@ -32,7 +30,7 @@ yarn install
 Create a `.env` file and setup DATABASE_URL variable for example:
 
 ```bash
-DATABASE_URL="mysql://root:password@localhost:3306/next"
+DATABASE_URL="mysql://root:password@localhost:3306/PrismaNext"
 ```
 
 Run the following command to create generate Schema & Migration & Seed Table
@@ -74,8 +72,6 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-```
-
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -94,4 +90,3 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ---
 
 Copyright © 2022 by Zac Zajdel
-```

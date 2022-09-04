@@ -10,6 +10,8 @@ const Header = () => {
         <a
           href="https://github.com/Zac-Zajdel/PrismaNext"
           className="flex items-center"
+          target="_blank"
+          rel="noreferrer"
         >
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             PrismaNext
