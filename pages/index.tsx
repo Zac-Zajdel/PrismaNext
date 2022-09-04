@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Head from 'next/head'
 import { InferGetServerSidePropsType } from 'next'
 import { getUser } from './api/user'
@@ -73,67 +72,49 @@ const Homepage = ({
             rel="noopener noreferrer"
             className="w-72 flex-grow flex-shrink-0 m-4 p-5 text-left no-underline border border-gray-200 rounded-xl transition duration-500 ease-in-out transform hover:text-blue-600 hover:border-2 hover:border-blue-600 focus:text-blue-600 focus:border-blue-600 active:text-blue-600 active:border-blue-600"
           >
-            <h3 className="mb-4 text-xl">Documentation &rarr;</h3>
+            <h3 className="mb-4 text-xl">Next.js &rarr;</h3>
             <span className="text-xl">
               Find in-depth information about Next.js features and API.
             </span>
           </a>
 
           <a
-            href="https://nextjs.org/learn"
+            href="https://www.prisma.io"
             target="_blank"
             rel="noopener noreferrer"
             className="w-72 flex-grow flex-shrink-0 m-4 p-5 text-left no-underline border border-gray-200 rounded-xl transition duration-500 ease-in-out transform hover:text-blue-600 hover:border-2 hover:border-blue-600 focus:text-blue-600 focus:border-blue-600 active:text-blue-600 active:border-blue-600"
           >
-            <h3 className="mb-4 text-xl">Learn &rarr;</h3>
+            <h3 className="mb-4 text-xl">Prisma &rarr;</h3>
             <span className="text-xl">
-              Learn about Next.js in an interactive course with quizzes!
+              A next-generation Node.js and Typescript ORM.
             </span>
           </a>
 
           <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
+            href="https://www.typescriptlang.org"
             target="_blank"
             rel="noopener noreferrer"
             className="w-72 flex-grow flex-shrink-0 m-4 p-5 text-left no-underline border border-gray-200 rounded-xl transition duration-500 ease-in-out transform hover:text-blue-600 hover:border-2 hover:border-blue-600 focus:text-blue-600 focus:border-blue-600 active:text-blue-600 active:border-blue-600"
           >
-            <h3 className="mb-4 text-xl">Examples &rarr;</h3>
+            <h3 className="mb-4 text-xl">TypeScript &rarr;</h3>
             <span className="text-xl">
-              Discover and deploy boilerplate example Next.js projects.
+              A strongly typed programming language built on JavaScript.
             </span>
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="https://tailwindcss.com"
             target="_blank"
             rel="noopener noreferrer"
             className="w-72 flex-grow flex-shrink-0 m-4 p-5 text-left no-underline border border-gray-200 rounded-xl transition duration-500 ease-in-out transform hover:text-blue-600 hover:border-2 hover:border-blue-600 focus:text-blue-600 focus:border-blue-600 active:text-blue-600 active:border-blue-600"
           >
-            <h3 className="mb-4 text-xl">Deploy &rarr;</h3>
+            <h3 className="mb-4 text-xl">Tailwind CSS &rarr;</h3>
             <span className="text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
+              A utility-first CSS framework to build modern websites
             </span>
           </a>
         </div>
       </main>
-
-      <footer className="w-full h-24 border-gray-200 border-t-2 flex justify-center items-center">
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center"
-        >
-          Powered by{' '}
-          <Image
-            src="/vercel.svg"
-            alt="Vercel Logo"
-            className="h-4 ml-2"
-            width={70}
-            height={70}
-          />
-        </a>
-      </footer>
     </div>
   )
 }
