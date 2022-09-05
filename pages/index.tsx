@@ -1,10 +1,14 @@
 import Head from 'next/head'
 import { InferGetServerSidePropsType } from 'next'
 import { getUser } from './api/user'
+import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 
 const Homepage = ({
   user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { data: session } = useSession()
+
   return (
     <div className="min-h-screen px-2 py-0 flex flex-col justify-center items-center">
       <Head>
@@ -51,19 +55,29 @@ const Homepage = ({
           </a>
         </h1>
 
-        <span className="text-xl text-center">
-          Get started by editing{' '}
-          <code className="bg-gray-50 rounded-md p-3 text-base font-mono">
-            pages/index.tsx
-          </code>
+        <span className="text-xl text-center pt-6">
+          {session?.user ? (
+            <div className="flex justify-center items-center">
+              <span className="pr-4">
+                You have successfully signed as {session.user.name}
+              </span>
+              <Image
+                src={session?.user?.image || ''}
+                width={30}
+                height={30}
+                alt="profile photo"
+                className="rounded-full"
+              />
+            </div>
+          ) : null}
         </span>
 
-        <span className="text-xl text-center pt-6">
+        <div className="text-xl text-center pt-6">
           The first users name from your local database is:{' '}
           <span className="pt-2 text-blue-600 text-2xl">
-            {user?.name ?? 'No User'}
+            {user?.name ?? 'No Users Exists Yet'}
           </span>
-        </span>
+        </div>
 
         <div className="flex flex-wrap justify-center items-center max-w-screen-md mt-12 sm:w-full">
           <a
