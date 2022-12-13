@@ -4,6 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 - [React.js 18](https://reactjs.org) - Documentation for React.js
 - [Next.js 12](https://nextjs.org) - Documentation for Next.js
+- [Turborepo](https://turbo.build/) - Documentation for TurboRepo
 - [NextAuth.js 4](https://next-auth.js.org/) - Documentation for NextAuth.js
 - [Typescript 4](https://www.typescriptlang.org) - Documentation for TypeScript
 - [Tailwind CSS 3](https://tailwindcss.com/docs/) - Documentation for Tailwind CSS.
