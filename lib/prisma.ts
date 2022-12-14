@@ -1,9 +1,8 @@
 import { PrismaClient } from '@prisma/client'
 
+// eslint-disable-next-line prettier/prettier
 declare global {
-  // allow global `var` declarations
   // eslint-disable-next-line no-var
-  // eslint-disable-next-line no-unused-vars
   var prisma: PrismaClient | undefined
 }
 

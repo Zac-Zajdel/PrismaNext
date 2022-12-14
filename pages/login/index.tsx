@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const Login = () => {
   const [provider, setProvider] = useState<Record<string, ClientSafeProvider>>(
-    {},
+    {}
   )
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Login = () => {
                 text-gray-800
                 hover:bg-gray-100
                 cursor-pointer
-                "
+            "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
