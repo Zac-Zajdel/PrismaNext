@@ -1,11 +1,9 @@
-version: 2,
+version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "wednesday"
-    assignees:
-      - "Zac-Zajdel"
+      interval: 'weekly'
+      day: 'wednesday'
     labels:
-      - "dependencies"
+      - 'dependencies'

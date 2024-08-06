@@ -1,114 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PrismaNext
 
-## Features
+## 🎉 Features
 
-- [React.js 18](https://reactjs.org) - Documentation for React.js
-- [Next.js 12](https://nextjs.org) - Documentation for Next.js
-- [Turborepo](https://turbo.build/) - Documentation for TurboRepo
-- [NextAuth.js 4](https://next-auth.js.org/) - Documentation for NextAuth.js
-- [Typescript 4](https://www.typescriptlang.org) - Documentation for TypeScript
-- [Tailwind CSS 3](https://tailwindcss.com/docs/) - Documentation for Tailwind CSS.
-- [ESLint 8](https://eslint.org/) - Documentation for ESLint.
-- [Prettier 2](https://prettier.io/docs/en/index.html) - Documentation for Prettier.
-- [Husky 8](https://typicode.github.io/husky/#/) - Documentation for Husky.
-- [Lint Staged 13](https://github.com/okonet/lint-staged) - Documentation for lint staged.
+- 🚀 [Next.js 14 (App router)](https://nextjs.org/) - Meta Framework for React
+- ⚛️ [React 18](https://react.dev/) - A library for web and native user interfaces
+- 📘 [Typescript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- 🎨 [TailwindCSS](https://tailwindcss.com/) - Class sorting, merging and linting
+- 🛠️ [shadcn/ui](https://ui.shadcn.com/) - Customizable UI components
+- 🔒 [Auth.js](https://authjs.dev/) - Authentication library (Google provider)
+- 🛡️ [Prisma](https://www.prisma.io/) - Next-generation Node.js and TypeScript ORM
+- 🔍 [Zod](https://zod.dev/) - Schema validation library
+- 🧪 [Vitest](https://vitest.dev/) - Vite powered API and component test framework
+- 💅 [Prettier](https://prettier.io/) - Code formatter
+- 🧹 [Eslint](https://eslint.org/) - Code linting tool
+- 🔹 [Lucide](https://lucide.dev/icons/) - Icons
+- 🌑 [Next-Themes](https://github.com/pacocoursey/next-themes) - Dark Mode
+- ⚙️ [T3 Env](https://env.t3.gg/) - Manage your environment variables
 
----
+## 🎯 Getting started
 
-## Installation
+### 1. Clone this template
 
 ```bash
 git clone https://github.com/Zac-Zajdel/PrismaNext.git
 ```
 
+### 2. Install dependencies
+
 ```bash
 yarn install
 ```
 
----
+### 3. Set up environment variables
 
-## Setup Prisma
+Create `.env` file and set env variables from `.env.example` file.
 
-Create a `.env` file and setup DATABASE_URL variable for example:
+### 4. Run the dev server
 
-```bash
-DATABASE_URL="mysql://root:password@localhost:3306/PrismaNext"
-```
-
-Run the following command to create generate Schema & Migration & Seed Table
-
-```bash
-yarn prisma migrate dev --name init
-```
-
----
-
-## Setup Google OAuth
-
-1. Create a Google Project within your [Google Cloud console](https://console.cloud.google.com/getting-started?pli=1)
-2. After creating your credentials, add them to your .env file
-
-```bash
-GOOGLE_CLIENT_ID="INSERT_CLIENT_ID_HERE"
-GOOGLE_CLIENT_SECRET="INSERT_CLIENT_SECRET_HERE"
-```
-
----
-
-## Development
+Start the server using this command:
 
 ```bash
 yarn dev
 ```
 
-Reset your database to generate your own migration:
+and open http://localhost:3000/ to see the landing page.
+
+## 📁 Project structure
 
 ```bash
-yarn prisma migrate reset
+.
+├── .github                         # GitHub folder
+├── .next                           # Auto-generated build files from Next.js
+├── app                             # Next JS App (App Router)
+├── components                      # React components
+├── lib                             # Validation, functions, and utilities
+├── prisma                          # Prisma schema and migrations
+├── public                          # Public assets folder
+├── styles                          # Styles folder
+├── tests                           # Vitest API calls
+├── types                           # Type definitions
+├── auth.ts                         # Auth.js configuration
+├── components.json                 # shadcn/ui configuration
+├── env.ts                          # T3-env build time ENV check
+├── middleware.ts                   # Middleware for Next.js routes
 ```
 
-If you change the seeder file, you can easily run the seeder with the following:
+## 🤝 Contribution
 
-```bash
-yarn prisma db seed
-```
+To contribute, please follow these steps:
 
----
+1. Clone the repository.
+2. Create a new branch.
+3. Make your changes and commit them.
+4. Push your changes to a PR.
+5. Create a pull request.
 
-## Production
+## ❤️ Support
 
-```bash
-npm run build or yarn build
-yarn start
-```
+If you like this project, feel free to leave a star. 🌟😊
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/user](http://localhost:3000/api/user). This endpoint can be edited in `pages/api/user.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
----
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
----
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
----
-
-Copyright © 2022 by Zac Zajdel
+Made by <a href="https://github.com/Zac-Zajdel">Zac Zajdel</a>
