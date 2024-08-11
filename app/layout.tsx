@@ -13,7 +13,7 @@ const fontSans = FontSans({
   variable: '--font-sans',
 });
 
-export const META_URL =
+const META_URL =
   process.env.NODE_ENV !== 'production'
     ? 'http://localhost:3000'
     : 'https://www.prismanext.com';

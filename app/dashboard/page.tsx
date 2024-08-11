@@ -28,6 +28,7 @@ export default function Dashboard() {
       toast.error(jsonData.message);
     } else {
       toast.success(jsonData.message);
+      setTitle('');
     }
   }
 

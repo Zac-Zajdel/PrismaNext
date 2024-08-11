@@ -3,11 +3,11 @@
 import FeatureCard from '@/components/landing/feature-card';
 import { motion } from 'framer-motion';
 import {
-  AppWindow,
   Database,
-  Eclipse,
-  Shield,
+  Lock,
+  Palette,
   ShieldCheck,
+  Triangle,
   Type,
 } from 'lucide-react';
 
@@ -57,12 +57,12 @@ export default function Landing() {
         >
           <ul className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-sm sm:mt-20 sm:grid-cols-2 md:gap-y-10 lg:max-w-none lg:grid-cols-3">
             <FeatureCard
-              Icon={AppWindow}
+              Icon={Triangle}
               title="Next.js"
               description="The React Framework for the Web."
             />
             <FeatureCard
-              Icon={Eclipse}
+              Icon={Palette}
               title="Tailwind CSS"
               description="Rapidly build modern websites without ever leaving your HTML."
             />
@@ -72,14 +72,14 @@ export default function Landing() {
               description="TypeScript is JavaScript with syntax for types."
             />
             <FeatureCard
-              Icon={Shield}
+              Icon={Lock}
               title="Auth.js"
-              description="Authentication for the Web."
+              description="Authentication with Google SSO enabled."
             />
             <FeatureCard
               Icon={ShieldCheck}
               title="Zod"
-              description="TypeScript-first schema validation with static type inference"
+              description="TypeScript-first schema validation with static type inference."
             />
             <FeatureCard
               Icon={Database}
