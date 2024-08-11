@@ -33,6 +33,16 @@ export const withAuthManager =
           );
         }
 
+        await prisma.apiToken.update({
+          where: {
+            token: externalDatabaseToken,
+            userId: authUser.id,
+          },
+          data: {
+            lastUsed: new Date(),
+          },
+        });
+
         user = {
           id: authUser.id,
           name: authUser.name,
