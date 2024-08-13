@@ -36,5 +36,4 @@ test('POST /notes', async (ctx: PrismaNextTestContext) => {
 
 afterAll(async () => {
   await prisma.note.deleteMany({});
-  await prisma.apiToken.deleteMany({});
 });

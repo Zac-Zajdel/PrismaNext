@@ -1,5 +1,5 @@
+import { hashApiToken } from '@/lib/api/apiTokens/utils';
 import { prisma } from '@/lib/db';
-import { hashApiToken } from '@/lib/utils';
 import { faker } from '@faker-js/faker';
 import { User } from '@prisma/client';
 import { randomBytes } from 'crypto';
@@ -9,10 +9,14 @@ export interface PrismaNextTestContext extends TestContext {
   apiToken: string;
 }
 
-let apiToken: string;
-let user: User;
+declare global {
+  var user: User;
+  var apiToken: string;
+}
 
 beforeAll(async () => {
+  if (global.user && global.apiToken) return;
+
   const apiUser = await prisma.user.upsert({
     where: {
       email: 'johndoe@gmail.com',
@@ -23,7 +27,8 @@ beforeAll(async () => {
       email: 'johndoe@gmail.com',
     },
   });
-  user = apiUser;
+
+  global.user = apiUser;
 
   const token = randomBytes(32).toString('hex');
   await prisma.apiToken.create({
@@ -34,12 +39,12 @@ beforeAll(async () => {
     },
   });
 
-  apiToken = token;
+  global.apiToken = token;
 });
 
 export function getSetupData() {
   return {
-    apiToken,
-    user,
+    apiToken: global.apiToken,
+    user: global.user,
   };
 }

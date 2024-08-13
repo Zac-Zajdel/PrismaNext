@@ -1,8 +1,8 @@
+import { hashApiToken } from '@/lib/api/apiTokens/utils';
 import { prisma } from '@/lib/db';
-import { hashApiToken } from '@/lib/utils';
 import { HttpSetup } from '@/tests/utils/integration';
 import { PrismaNextTestContext, getSetupData } from '@/tests/utils/setup';
-import { afterAll, expect, test } from 'vitest';
+import { expect, test } from 'vitest';
 
 test('POST /tokens', async (ctx: PrismaNextTestContext) => {
   const setup = await getSetupData();
@@ -42,8 +42,4 @@ test('POST /tokens', async (ctx: PrismaNextTestContext) => {
       lastUsed: null,
     }),
   );
-});
-
-afterAll(async () => {
-  await prisma.apiToken.deleteMany({});
 });

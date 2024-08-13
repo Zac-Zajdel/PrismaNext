@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
+import { hashApiToken } from '@/lib/api/apiTokens/utils';
 import { prisma } from '@/lib/db';
-import { hashApiToken } from '@/lib/utils';
 import { AuthUser, WithAuthManagerInterface } from '@/types/auth';
 import { NextResponse, type NextRequest } from 'next/server';
 import { z } from 'zod';
