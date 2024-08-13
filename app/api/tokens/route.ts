@@ -1,6 +1,6 @@
+import { hashApiToken } from '@/lib/api/apiTokens/utils';
 import { withAuthManager } from '@/lib/authManager';
 import { prisma } from '@/lib/db';
-import { hashApiToken } from '@/lib/utils';
 import { createApiTokenSchema } from '@/lib/zod/apiTokens';
 import { randomBytes } from 'crypto';
 import { NextResponse } from 'next/server';
