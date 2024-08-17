@@ -60,7 +60,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col items-center space-y-10 mt-24">
+    <div className="mt-24 flex flex-col items-center space-y-10">
       <div>ID: {session?.user?.id}</div>
       <div>Name: {session?.user?.name}</div>
 

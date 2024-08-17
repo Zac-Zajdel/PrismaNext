@@ -12,7 +12,7 @@ export default function FeatureCard({
   Icon: LucideIcon;
 }) {
   return (
-    <li className="rounded-2xl border border-gray-200 p-8 relative transform transition-transform duration-300 hover:scale-105">
+    <li className="relative transform rounded-2xl border border-gray-200 p-8 transition-transform duration-300 hover:scale-105">
       <div className="absolute inset-0 rounded-2xl transition duration-300 [mask-image:linear-gradient(white,transparent)]">
         <svg
           aria-hidden="true"
@@ -71,10 +71,10 @@ export default function FeatureCard({
 
       <div className="relative z-10">
         <Icon className="text-muted-foreground" />
-        <h3 className="mt-6 font-semibold tracking-wide text-lg leading-6">
+        <h3 className="mt-6 text-lg font-semibold leading-6 tracking-wide">
           {title}
         </h3>
-        <p className="leading-6 text-muted-foreground mt-2">{description}</p>
+        <p className="mt-2 leading-6 text-muted-foreground">{description}</p>
       </div>
     </li>
   );
