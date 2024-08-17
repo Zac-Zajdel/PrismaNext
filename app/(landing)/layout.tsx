@@ -27,7 +27,7 @@ export default function LandingLayout({ children }: MarketingLayoutProps) {
       </header>
       <main className="flex-1">{children}</main>
       <footer className="container">
-        <div className="flex pt-20 pb-5 items-center justify-between">
+        <div className="flex items-center justify-between pb-5 pt-20">
           <div className="flex items-center text-base">
             <p className="text-muted-foreground">
               Proudly built in open source by&nbsp;

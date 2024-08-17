@@ -15,9 +15,9 @@ export default function Error() {
         </div>
       </header>
       <main className="container mt-40">
-        <div className="flex flex-col justify-center mx-auto">
-          <h1 className="text-center text-5xl mb-8">(╯°□°)╯︵ ┻━┻</h1>
-          <h2 className="text-center text-base mb-5">
+        <div className="mx-auto flex flex-col justify-center">
+          <h1 className="mb-8 text-center text-5xl">(╯°□°)╯︵ ┻━┻</h1>
+          <h2 className="mb-5 text-center text-base">
             Looks like something went wrong...
           </h2>
           <div className="text-center">
