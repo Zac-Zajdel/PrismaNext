@@ -16,6 +16,7 @@
 - 🔹 [Lucide](https://lucide.dev/icons/) - Icons
 - 🌑 [Next-Themes](https://github.com/pacocoursey/next-themes) - Dark Mode
 - ⚙️ [T3 Env](https://env.t3.gg/) - Manage your environment variables
+- 🪵 [Winston](https://github.com/winstonjs/winston) - Better development logging
 
 ## 🎯 Getting started
 
