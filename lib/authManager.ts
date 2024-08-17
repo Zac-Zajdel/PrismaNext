@@ -1,6 +1,7 @@
 import { auth } from '@/auth';
 import { hashApiToken } from '@/lib/api/apiTokens/utils';
 import { prisma } from '@/lib/db';
+import { logger } from '@/logger';
 import { AuthUser, WithAuthManagerInterface } from '@/types/auth';
 import { NextResponse, type NextRequest } from 'next/server';
 import { z } from 'zod';
@@ -68,14 +69,23 @@ export const withAuthManager =
       return await handler({ req, user, searchParams });
     } catch (error) {
       if (error instanceof z.ZodError) {
+        const message = error.errors?.[0]?.message || 'Invalid data provided';
+
+        logger.error('Zod Error', { message, error });
+
         return NextResponse.json(
           {
             success: false,
-            message: error.errors?.[0]?.message || 'Invalid data provided',
+            message,
             error,
           },
           { status: 400 },
         );
+      } else if (error instanceof Error) {
+        logger.error('API Error', {
+          error: error.message,
+          stack: error.stack,
+        });
       }
 
       return NextResponse.json(
