@@ -4,9 +4,7 @@ import { expect, test } from 'vitest';
 
 test('EXTERNAL API AUTH ERROR', async (ctx: PrismaNextTestContext) => {
   ctx.apiToken = 'INVALID API TOKEN';
-
-  const h = new HttpSetup(ctx);
-  const { http } = await h.init();
+  const { http } = await new HttpSetup(ctx, true).init();
 
   const {
     status,

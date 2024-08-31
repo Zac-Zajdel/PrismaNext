@@ -5,7 +5,11 @@ export class HttpSetup {
   private readonly ctx?: PrismaNextTestContext;
   public http: HttpClient;
 
-  constructor(ctx?: PrismaNextTestContext) {
+  constructor(ctx?: PrismaNextTestContext, testFailure: boolean = false) {
+    if (ctx && !testFailure) {
+      ctx.apiToken = global.apiToken;
+    }
+
     this.ctx = ctx;
     this.http = new HttpClient({
       baseUrl: `http://localhost:3000/api`,

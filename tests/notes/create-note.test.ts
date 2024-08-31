@@ -5,11 +5,8 @@ import { Note } from '@prisma/client';
 import { afterAll, expect, test } from 'vitest';
 
 test('POST /notes', async (ctx: PrismaNextTestContext) => {
-  const setup = await getSetupData();
-  ctx.apiToken = setup.apiToken;
-
-  const h = new HttpSetup(ctx);
-  const { http } = await h.init();
+  const { user } = await getSetupData();
+  const { http } = await new HttpSetup(ctx).init();
 
   const {
     status,
@@ -27,7 +24,7 @@ test('POST /notes', async (ctx: PrismaNextTestContext) => {
   expect(message).toBe('Note was created successfully.');
   expect(note).toEqual(
     expect.objectContaining({
-      userId: setup.user.id,
+      userId: user.id,
       title: 'This is a title',
       description: 'This is a description',
     }),

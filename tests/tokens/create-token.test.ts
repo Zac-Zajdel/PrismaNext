@@ -5,11 +5,8 @@ import { PrismaNextTestContext, getSetupData } from '@/tests/utils/setup';
 import { expect, test } from 'vitest';
 
 test('POST /tokens', async (ctx: PrismaNextTestContext) => {
-  const setup = await getSetupData();
-  ctx.apiToken = setup.apiToken;
-
-  const h = new HttpSetup(ctx);
-  const { http } = await h.init();
+  const { user } = await getSetupData();
+  const { http } = await new HttpSetup(ctx).init();
 
   const {
     status,
@@ -36,7 +33,7 @@ test('POST /tokens', async (ctx: PrismaNextTestContext) => {
 
   expect(generatedApiToken).toEqual(
     expect.objectContaining({
-      userId: setup.user.id,
+      userId: user.id,
       name: 'Custom API Token',
       token: await hashApiToken(token),
       lastUsed: null,

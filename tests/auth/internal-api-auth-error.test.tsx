@@ -3,8 +3,7 @@ import { PrismaNextTestContext } from '@/tests/utils/setup';
 import { expect, test } from 'vitest';
 
 test('INTERNAL API AUTH ERROR', async (ctx: PrismaNextTestContext) => {
-  const h = new HttpSetup(ctx);
-  const { http } = await h.init();
+  const { http } = await new HttpSetup(ctx, true).init();
 
   const {
     status,
