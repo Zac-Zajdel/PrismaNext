@@ -2,108 +2,142 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useMutation } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { queryClient } from '@/lib/utils';
+import { ApiResponse } from '@/types/apiHelpers';
+import { Note } from '@prisma/client';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { LoaderCircle, NotebookPen } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 export default function Dashboard() {
-  const { data: session } = useSession();
   const [title, setTitle] = useState('');
 
-  const noteMutation = useMutation({
-    mutationFn: createNote,
+  const { isLoading, data: notes } = useQuery({
+    queryKey: ['notes'],
+    queryFn: async (): Promise<Note[]> => {
+      const { success, message, data }: ApiResponse<Note[]> = await (
+        await fetch(`/api/notes`)
+      ).json();
+
+      if (!success) {
+        toast.error(message);
+        return [];
+      }
+
+      return data;
+    },
   });
 
-  async function createNote() {
-    const response = await fetch('/api/notes', {
-      method: 'POST',
-      body: JSON.stringify({
-        title: title,
-      }),
-    });
+  const createNoteMutation = useMutation({
+    mutationFn: async (): Promise<void> => {
+      const { success, message } = await (
+        await fetch('/api/notes', {
+          method: 'POST',
+          body: JSON.stringify({
+            title: title,
+          }),
+        })
+      ).json();
 
-    const jsonData = await response.json();
-    if (!jsonData.success) {
-      toast.error(jsonData.message);
-    } else {
-      toast.success(jsonData.message);
-      setTitle('');
-    }
-  }
+      if (!success) {
+        toast.error(message);
+      } else {
+        toast.success(message);
+        setTitle('');
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ['notes'],
+      });
+    },
+  });
 
   const externalApiMutation = useMutation({
-    mutationFn: createExternalApiToken,
+    mutationFn: async (formData: { name: string }): Promise<void> => {
+      const { success, message, data } = await (
+        await fetch('/api/tokens', {
+          method: 'POST',
+          body: JSON.stringify({
+            name: formData.name,
+          }),
+        })
+      ).json();
+
+      if (!success) {
+        toast.error(message);
+      } else {
+        toast.success(message);
+        toast.success(data);
+      }
+    },
   });
 
-  async function createExternalApiToken(formData: { name: string }): Promise<{
-    success: boolean;
-    message: string;
-    data: any;
-  }> {
-    const response = await fetch('/api/tokens', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: formData.name,
-      }),
-    });
-
-    const jsonData = await response.json();
-    if (!jsonData.success) {
-      toast.error(jsonData.message);
-    } else {
-      toast.success(jsonData.message);
-      toast.success(jsonData.data);
-    }
-
-    return jsonData;
-  }
-
   return (
-    <div className="mt-24 flex flex-col items-center space-y-10">
-      <div>ID: {session?.user?.id}</div>
-      <div>Name: {session?.user?.name}</div>
-
-      <Button
-        variant="outline"
-        onClick={() =>
-          toast.success('Event has been created', {
-            description: 'Sunday, December 03, 2023 at 9:00 AM',
-          })
-        }
-      >
-        Show Toast
-      </Button>
-
-      <div className="flex items-center space-x-4">
-        <Input
-          value={title}
-          className="w-96"
-          onChange={(event) => setTitle(event?.target.value)}
-          placeholder="Add Note Title Here..."
-        />
-        <Button
-          variant="outline"
-          disabled={noteMutation.isPending}
-          onClick={() => {
-            noteMutation.mutate();
-          }}
-        >
-          Create
-        </Button>
+    <div className="container mt-12 flex flex-col space-y-5">
+      <div className="flex justify-between">
+        <div className="flex space-x-4">
+          <Input
+            value={title}
+            className="w-96"
+            onChange={(event) => setTitle(event?.target.value)}
+            placeholder="Add Note Title Here..."
+          />
+          <Button
+            variant="outline"
+            disabled={createNoteMutation.isPending}
+            onClick={() => {
+              createNoteMutation.mutate();
+            }}
+          >
+            {createNoteMutation.isPending ? (
+              <LoaderCircle className="mr-2 size-4 animate-spin" />
+            ) : (
+              <NotebookPen className="mr-2 size-4" />
+            )}
+            Create
+          </Button>
+        </div>
+        <div className="">
+          <Button
+            variant="outline"
+            disabled={externalApiMutation.isPending}
+            onClick={() => {
+              externalApiMutation.mutate({
+                name: Math.random().toString(36).slice(2, 7),
+              });
+            }}
+          >
+            Create API Token
+          </Button>
+        </div>
       </div>
 
-      <Button
-        variant="outline"
-        disabled={externalApiMutation.isPending}
-        onClick={() => {
-          externalApiMutation.mutate({
-            name: Math.random().toString(36).slice(2, 7),
-          });
-        }}
-      >
-        Create API Token
-      </Button>
+      <div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">Title</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {notes?.map((note) => (
+              <TableRow key={note.id}>
+                <TableCell className="font-medium">{note.title}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }
