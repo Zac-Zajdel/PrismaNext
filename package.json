@@ -25,7 +25,7 @@
     "framer-motion": "^11.3.21",
     "jiti": "^1.21.6",
     "lucide-react": "^0.417.0",
-    "next": "14.2.5",
+    "next": "14.2.10",
     "next-auth": "^5.0.0-beta.19",
     "next-themes": "^0.3.0",
     "prisma": "^5.17.0",
