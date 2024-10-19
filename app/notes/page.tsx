@@ -18,7 +18,7 @@ import { LoaderCircle, NotebookPen } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-export default function Dashboard() {
+export default function NotesPage() {
   const [title, setTitle] = useState('');
 
   const { isLoading, data: notes } = useQuery({
@@ -84,30 +84,29 @@ export default function Dashboard() {
 
   return (
     <div className="container mt-12 flex flex-col space-y-5">
-      <div className="flex justify-between">
-        <div className="flex space-x-4">
-          <Input
-            value={title}
-            className="w-96"
-            onChange={(event) => setTitle(event?.target.value)}
-            placeholder="Add Note Title Here..."
-          />
-          <Button
-            variant="outline"
-            disabled={createNoteMutation.isPending}
-            onClick={() => {
-              createNoteMutation.mutate();
-            }}
-          >
-            {createNoteMutation.isPending ? (
-              <LoaderCircle className="mr-2 size-4 animate-spin" />
-            ) : (
-              <NotebookPen className="mr-2 size-4" />
-            )}
-            Create
-          </Button>
-        </div>
-        <div className="">
+      <div className="flex justify-between space-x-4">
+        <Input
+          value={title}
+          className="w-80"
+          onChange={(event) => setTitle(event?.target.value)}
+          placeholder="Add Note Title Here..."
+        />
+        <Button
+          variant="outline"
+          disabled={createNoteMutation.isPending}
+          onClick={() => {
+            if (title.length === 0) return toast.error('Title is required');
+            createNoteMutation.mutate();
+          }}
+        >
+          {createNoteMutation.isPending ? (
+            <LoaderCircle className="mr-2 size-4 animate-spin" />
+          ) : (
+            <NotebookPen className="mr-2 size-4" />
+          )}
+          Create
+        </Button>
+        {/* <div>
           <Button
             variant="outline"
             disabled={externalApiMutation.isPending}
@@ -119,7 +118,7 @@ export default function Dashboard() {
           >
             Create API Token
           </Button>
-        </div>
+        </div> */}
       </div>
 
       <div>

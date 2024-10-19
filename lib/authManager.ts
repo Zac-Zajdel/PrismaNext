@@ -15,7 +15,7 @@ export const withAuthManager =
       // User is using external API token.
       if (authorizationHeader) {
         const userPassedToken = authorizationHeader.replace('Bearer ', '');
-        const externalDatabaseToken = await hashApiToken(userPassedToken);
+        const externalDatabaseToken = hashApiToken(userPassedToken);
 
         const authUser = await prisma.user.findFirst({
           where: {

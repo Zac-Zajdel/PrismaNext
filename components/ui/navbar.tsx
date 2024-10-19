@@ -7,11 +7,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { ModeToggle } from '@/components/ui/mode-toggle';
 import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/utils';
 import { signOut, useSession } from 'next-auth/react';
-import { ModeToggle } from './mode-toggle';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const { data: session } = useSession();
 
   return (
@@ -21,6 +25,34 @@ export default function Navbar() {
           <div className="flex flex-1 items-center sm:items-center sm:justify-start">
             <div className="hidden flex-shrink-0 items-center sm:block">
               <h1 className="mr-4 text-lg font-bold">PrismaNext</h1>
+            </div>
+            <div className="ml-4 flex items-center justify-between">
+              <div className="space-x-5">
+                <Link
+                  href="/notes"
+                  prefetch={false}
+                  className={cn(
+                    pathname.includes('/notes')
+                      ? 'border-b-2 border-b-muted-foreground dark:border-b-white'
+                      : 'text-muted-foreground',
+                    'whitespace-nowrap px-2 pb-[0.90rem] text-sm font-medium',
+                  )}
+                >
+                  Notes
+                </Link>
+                <Link
+                  href="/tokens"
+                  prefetch={false}
+                  className={cn(
+                    pathname.includes('/tokens')
+                      ? 'border-b-2 border-b-muted-foreground'
+                      : 'text-muted-foreground',
+                    'whitespace-nowrap px-2 pb-[0.90rem] text-sm font-medium',
+                  )}
+                >
+                  API Tokens
+                </Link>
+              </div>
             </div>
           </div>
 

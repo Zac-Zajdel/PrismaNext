@@ -8,11 +8,13 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
+    "analyze": "ANALYZE=true yarn build",
     "format": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\"",
     "reset": "prisma migrate reset"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.1",
+    "@next/bundle-analyzer": "^14.2.15",
     "@prisma/client": "^5.17.0",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
