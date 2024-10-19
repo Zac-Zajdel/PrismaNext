@@ -10,9 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { ApiResponse } from '@/types/apiHelpers';
-import { Note } from '@prisma/client';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useNotesQuery } from '@/hooks/notes/useNotesQuery';
+import { useMutation } from '@tanstack/react-query';
 import { LoaderCircle, NotebookPen } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -20,21 +19,7 @@ import { toast } from 'sonner';
 export default function NotesPage() {
   const [tokenName, setTokenName] = useState('');
 
-  const { data: notes } = useQuery({
-    queryKey: ['notes'],
-    queryFn: async (): Promise<Note[]> => {
-      const { success, message, data }: ApiResponse<Note[]> = await (
-        await fetch(`/api/notes`)
-      ).json();
-
-      if (!success) {
-        toast.error(message);
-        return [];
-      }
-
-      return data;
-    },
-  });
+  const { data: notes } = useNotesQuery();
 
   const externalApiMutation = useMutation({
     mutationFn: async (formData: { name: string }): Promise<void> => {

@@ -10,10 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useNotesQuery } from '@/hooks/notes/useNotesQuery';
 import { queryClient } from '@/lib/utils';
-import { ApiResponse } from '@/types/apiHelpers';
-import { Note } from '@prisma/client';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { LoaderCircle, NotebookPen } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -21,21 +20,7 @@ import { toast } from 'sonner';
 export default function NotesPage() {
   const [title, setTitle] = useState('');
 
-  const { isLoading, data: notes } = useQuery({
-    queryKey: ['notes'],
-    queryFn: async (): Promise<Note[]> => {
-      const { success, message, data }: ApiResponse<Note[]> = await (
-        await fetch(`/api/notes`)
-      ).json();
-
-      if (!success) {
-        toast.error(message);
-        return [];
-      }
-
-      return data;
-    },
-  });
+  const { data: notes } = useNotesQuery();
 
   const createNoteMutation = useMutation({
     mutationFn: async (): Promise<void> => {
@@ -59,26 +44,6 @@ export default function NotesPage() {
       await queryClient.invalidateQueries({
         queryKey: ['notes'],
       });
-    },
-  });
-
-  const externalApiMutation = useMutation({
-    mutationFn: async (formData: { name: string }): Promise<void> => {
-      const { success, message, data } = await (
-        await fetch('/api/tokens', {
-          method: 'POST',
-          body: JSON.stringify({
-            name: formData.name,
-          }),
-        })
-      ).json();
-
-      if (!success) {
-        toast.error(message);
-      } else {
-        toast.success(message);
-        toast.success(data);
-      }
     },
   });
 
@@ -106,19 +71,6 @@ export default function NotesPage() {
           )}
           Create
         </Button>
-        {/* <div>
-          <Button
-            variant="outline"
-            disabled={externalApiMutation.isPending}
-            onClick={() => {
-              externalApiMutation.mutate({
-                name: Math.random().toString(36).slice(2, 7),
-              });
-            }}
-          >
-            Create API Token
-          </Button>
-        </div> */}
       </div>
 
       <div>
