@@ -54,14 +54,18 @@ and open http://localhost:3000/ to see the landing page.
 ├── .next                           # Auto-generated build files from Next.js
 ├── app                             # Next JS App (App Router)
 ├── components                      # React components
+├── hooks                           # Custom hooks
 ├── lib                             # Validation, functions, and utilities
 ├── prisma                          # Prisma schema and migrations
 ├── public                          # Public assets folder
 ├── styles                          # Styles folder
 ├── tests                           # Vitest API calls
 ├── types                           # Type definitions
+├── vitest.config.ts                # Vitest configuration
+├── app.log                         # Winston Log file
 ├── auth.ts                         # Auth.js configuration
 ├── components.json                 # shadcn/ui configuration
+├── tailwind.config.ts              # Tailwind configuration
 ├── env.ts                          # T3-env build time ENV check
 ├── middleware.ts                   # Middleware for Next.js routes
 ```
@@ -70,6 +74,12 @@ and open http://localhost:3000/ to see the landing page.
 
 ```bash
 yarn analyze
+```
+
+## 🧪 Run Test Suite
+
+```bash
+yarn test
 ```
 
 ## 🤝 Contribution
