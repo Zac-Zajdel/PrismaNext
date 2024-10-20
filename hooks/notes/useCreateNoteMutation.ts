@@ -1,11 +1,16 @@
 import { ApiResponse } from '@/types/apiHelpers';
+import { Note } from '@prisma/client';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 export const useCreateNoteMutation = () => {
   return useMutation({
     mutationFn: async (title: string) => {
-      const { success, message }: ApiResponse<string> = await (
+      const {
+        success,
+        message,
+        data: note,
+      }: ApiResponse<Note> = await (
         await fetch('/api/notes', {
           method: 'POST',
           body: JSON.stringify({
@@ -19,7 +24,7 @@ export const useCreateNoteMutation = () => {
         throw new Error(message);
       }
 
-      return { message };
+      return { note, message };
     },
   });
 };

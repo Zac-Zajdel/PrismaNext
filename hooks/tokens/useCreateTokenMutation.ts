@@ -5,7 +5,11 @@ import { toast } from 'sonner';
 export const useCreateTokenMutation = () => {
   return useMutation({
     mutationFn: async (name: string) => {
-      const { success, message, data }: ApiResponse<string> = await (
+      const {
+        success,
+        message,
+        data: token,
+      }: ApiResponse<string> = await (
         await fetch('/api/tokens', {
           method: 'POST',
           body: JSON.stringify({
@@ -20,7 +24,7 @@ export const useCreateTokenMutation = () => {
       }
 
       return {
-        data,
+        token,
         message,
       };
     },
