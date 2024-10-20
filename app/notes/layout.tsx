@@ -1,10 +1,10 @@
 import Navbar from '@/components/ui/navbar';
 
-interface DashboardLayoutProps {
+interface NoteLayoutProps {
   children: React.ReactNode;
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function NoteLayout({ children }: NoteLayoutProps) {
   return (
     <div className="min-h-screen">
       <Navbar />

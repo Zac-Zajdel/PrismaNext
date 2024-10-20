@@ -35,7 +35,7 @@ beforeAll(async () => {
     data: {
       userId: user.id,
       name: faker.lorem.word(),
-      token: await hashApiToken(token),
+      token: hashApiToken(token),
     },
   });
 

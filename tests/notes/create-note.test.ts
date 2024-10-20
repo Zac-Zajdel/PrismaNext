@@ -5,7 +5,7 @@ import { Note } from '@prisma/client';
 import { afterAll, expect, test } from 'vitest';
 
 test('POST /notes', async (ctx: PrismaNextTestContext) => {
-  const { user } = await getSetupData();
+  const { user } = getSetupData();
   const { http } = await new HttpSetup(ctx).init();
 
   const {

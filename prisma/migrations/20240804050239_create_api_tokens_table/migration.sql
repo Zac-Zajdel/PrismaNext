@@ -15,7 +15,7 @@ CREATE TABLE "api_tokens" (
 CREATE UNIQUE INDEX "api_tokens_token_key" ON "api_tokens"("token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "api_tokens_user_id_name_token_key" ON "api_tokens"("user_id", "name", "token");
+CREATE UNIQUE INDEX "api_tokens_user_id_name_key" ON "api_tokens"("user_id", "name");
 
 -- AddForeignKey
 ALTER TABLE "api_tokens" ADD CONSTRAINT "api_tokens_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;

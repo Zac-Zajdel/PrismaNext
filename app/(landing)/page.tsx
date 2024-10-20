@@ -39,7 +39,7 @@ export default function Landing() {
               ease: [0, 0.71, 0.2, 1.01],
             }}
           >
-            A Batteries Included Template For Your Next Adventure
+            A Batteries Included Template For Your &quot;Next&quot; Adventure
           </motion.h2>
         </div>
       </section>

@@ -93,6 +93,6 @@ model ApiToken {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, name, token])
+  @@unique([userId, name])
   @@map("api_tokens")
 }
