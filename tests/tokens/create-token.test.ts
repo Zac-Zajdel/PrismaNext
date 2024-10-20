@@ -2,11 +2,14 @@ import { hashApiToken } from '@/lib/api/apiTokens/utils';
 import { prisma } from '@/lib/db';
 import { HttpSetup } from '@/tests/utils/integration';
 import { PrismaNextTestContext, getSetupData } from '@/tests/utils/setup';
+import { randomBytes } from 'crypto';
 import { expect, test } from 'vitest';
 
 test('POST /tokens', async (ctx: PrismaNextTestContext) => {
   const { user } = getSetupData();
   const { http } = await new HttpSetup(ctx).init();
+
+  const name = `API Token - ${randomBytes(15).toString('hex').toString()}`;
 
   const {
     status,
@@ -14,7 +17,7 @@ test('POST /tokens', async (ctx: PrismaNextTestContext) => {
   } = await http.post<string>({
     path: '/tokens',
     body: {
-      name: 'Custom API Token',
+      name,
     },
   });
 
@@ -33,8 +36,8 @@ test('POST /tokens', async (ctx: PrismaNextTestContext) => {
 
   expect(generatedApiToken).toEqual(
     expect.objectContaining({
+      name,
       userId: user.id,
-      name: 'Custom API Token',
       token: hashApiToken(token),
       lastUsed: null,
     }),

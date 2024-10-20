@@ -3,8 +3,28 @@ import { withAuthManager } from '@/lib/authManager';
 import { prisma } from '@/lib/db';
 import { createApiTokenSchema } from '@/lib/zod/apiTokens';
 import { ApiResponse } from '@/types/apiHelpers';
+import { ApiToken } from '@prisma/client';
 import { randomBytes } from 'crypto';
 import { NextResponse } from 'next/server';
+
+export const GET = withAuthManager(
+  async ({ user }): Promise<NextResponse<ApiResponse<ApiToken[]>>> => {
+    const apiTokens = await prisma.apiToken.findMany({
+      where: {
+        userId: user.id,
+      },
+    });
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'API Tokens gathered successfully.',
+        data: apiTokens,
+      },
+      { status: 200 },
+    );
+  },
+);
 
 export const POST = withAuthManager(
   async ({ req, user }): Promise<NextResponse<ApiResponse<string>>> => {
