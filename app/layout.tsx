@@ -65,7 +65,7 @@ export default function RootLayout({
                 richColors
                 closeButton
                 toastOptions={{
-                  duration: 5000,
+                  duration: 3000,
                 }}
               />
               <ReactQueryDevtools initialIsOpen={false} />

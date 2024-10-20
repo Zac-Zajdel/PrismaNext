@@ -4,7 +4,9 @@ import { toast } from 'sonner';
 
 export const useCreateTokenMutation = () => {
   return useMutation({
-    mutationFn: async (name: string) => {
+    mutationFn: async (
+      name: string,
+    ): Promise<{ token: string; message: string }> => {
       const {
         success,
         message,
@@ -18,15 +20,13 @@ export const useCreateTokenMutation = () => {
         })
       ).json();
 
-      if (!success) {
-        toast.error(message);
-        throw new Error(message);
-      }
+      if (!success) throw new Error(message);
 
       return {
         token,
         message,
       };
     },
+    onError: (error) => toast.error(error.message),
   });
 };

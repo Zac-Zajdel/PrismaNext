@@ -5,7 +5,9 @@ import { toast } from 'sonner';
 
 export const useCreateNoteMutation = () => {
   return useMutation({
-    mutationFn: async (title: string) => {
+    mutationFn: async (
+      title: string,
+    ): Promise<{ note: Note; message: string }> => {
       const {
         success,
         message,
@@ -19,12 +21,10 @@ export const useCreateNoteMutation = () => {
         })
       ).json();
 
-      if (!success) {
-        toast.error(message);
-        throw new Error(message);
-      }
+      if (!success) throw new Error(message);
 
       return { note, message };
     },
+    onError: (error) => toast.error(error.message),
   });
 };
