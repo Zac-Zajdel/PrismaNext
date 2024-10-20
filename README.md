@@ -82,6 +82,12 @@ yarn analyze
 yarn test
 ```
 
+## 🤖 Deploy To Vercel
+
+- The easiest way to get up and running is to deploy via [Vercel](https://vercel.com/home).
+- Before deploying, ensure you all required ENV variables specified within `env.ts`.
+- If the build fails, analyze the attached logs of your deployment for more information.
+
 ## 🤝 Contribution
 
 To contribute, please follow these steps:
