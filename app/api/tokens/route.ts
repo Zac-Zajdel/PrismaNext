@@ -28,8 +28,8 @@ export const GET = withAuthManager(
 
 export const POST = withAuthManager(
   async ({ req, user }): Promise<NextResponse<ApiResponse<string>>> => {
-    const schema = createApiTokenSchema();
-    const { name } = schema.parse(await req.json());
+    const schema = createApiTokenSchema(user);
+    const { name } = await schema.parseAsync(await req.json());
 
     // Generate a 32-byte token for user to include in API requests.
     const apiToken = randomBytes(32).toString('hex');

@@ -10,9 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useCreateNoteMutation } from '@/hooks/notes/useCreateNoteMutation';
 import { useNotesQuery } from '@/hooks/notes/useNotesQuery';
 import { queryClient } from '@/lib/utils';
-import { useMutation } from '@tanstack/react-query';
 import { LoaderCircle, NotebookPen } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -21,31 +21,22 @@ export default function NotesPage() {
   const [title, setTitle] = useState('');
 
   const { data: notes } = useNotesQuery();
+  const createNoteMutation = useCreateNoteMutation();
 
-  const createNoteMutation = useMutation({
-    mutationFn: async (): Promise<void> => {
-      const { success, message } = await (
-        await fetch('/api/notes', {
-          method: 'POST',
-          body: JSON.stringify({
-            title: title,
-          }),
-        })
-      ).json();
+  const createNote = async () => {
+    if (!title.length) return toast.error('Title is required');
 
-      if (!success) {
-        toast.error(message);
-      } else {
+    createNoteMutation.mutate(title, {
+      onSuccess: async ({ message }: { message: string }) => {
         toast.success(message);
         setTitle('');
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ['notes'],
-      });
-    },
-  });
+
+        await queryClient.invalidateQueries({
+          queryKey: ['notes'],
+        });
+      },
+    });
+  };
 
   return (
     <div className="container mt-12 flex flex-col space-y-5">
@@ -59,10 +50,7 @@ export default function NotesPage() {
         <Button
           variant="outline"
           disabled={createNoteMutation.isPending}
-          onClick={() => {
-            if (title.length === 0) return toast.error('Title is required');
-            createNoteMutation.mutate();
-          }}
+          onClick={createNote}
         >
           {createNoteMutation.isPending ? (
             <LoaderCircle className="mr-2 size-4 animate-spin" />

@@ -10,36 +10,69 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useNotesQuery } from '@/hooks/notes/useNotesQuery';
-import { useMutation } from '@tanstack/react-query';
-import { LoaderCircle, NotebookPen } from 'lucide-react';
+import { useCreateTokenMutation } from '@/hooks/tokens/useCreateTokenMutation';
+import { useTokensQuery } from '@/hooks/tokens/useTokensQuery';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
+import { queryClient } from '@/lib/utils';
+import { CopyIcon, LoaderCircle, NotebookPen } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 export default function NotesPage() {
+  const copy = useCopyToClipboard();
+  const { data: tokens } = useTokensQuery();
+  const createTokenMutation = useCreateTokenMutation();
+
   const [tokenName, setTokenName] = useState('');
 
-  const { data: notes } = useNotesQuery();
+  const generateToken = async () => {
+    if (!tokenName.length) return toast.error('You must supply a name.');
 
-  const externalApiMutation = useMutation({
-    mutationFn: async (formData: { name: string }): Promise<void> => {
-      const { success, message, data } = await (
-        await fetch('/api/tokens', {
-          method: 'POST',
-          body: JSON.stringify({
-            name: formData.name,
-          }),
-        })
-      ).json();
+    createTokenMutation.mutate(tokenName, {
+      onSuccess: async ({
+        data,
+        message,
+      }: {
+        data: string;
+        message: string;
+      }) => {
+        toast.success(
+          <div>
+            <div className="pb-5">{message}</div>
+            <div className="flex items-center justify-start">
+              <Button
+                variant="ghost"
+                size={'sm'}
+                className="cursor-pointer hover:bg-green-900/10"
+                onClick={() =>
+                  copy(data)
+                    .then(() => toast.success('Copied to clipboard'))
+                    .catch(() => toast.error('Failed to copy'))
+                }
+                style={{
+                  color: 'var(--success-text)',
+                  border: '1px solid var(--success-text)',
+                }}
+              >
+                <CopyIcon className="h-4 w-4" />
+              </Button>
 
-      if (!success) {
-        toast.error(message);
-      } else {
-        toast.success(message);
-        toast.success(data);
-      }
-    },
-  });
+              <p className="ml-4">{data}</p>
+            </div>
+          </div>,
+          {
+            duration: 10000,
+          },
+        );
+
+        setTokenName('');
+
+        await queryClient.invalidateQueries({
+          queryKey: ['tokens'],
+        });
+      },
+    });
+  };
 
   return (
     <div className="container mt-12 flex flex-col space-y-5">
@@ -52,16 +85,10 @@ export default function NotesPage() {
         />
         <Button
           variant="outline"
-          disabled={externalApiMutation.isPending}
-          onClick={() => {
-            if (tokenName.length === 0)
-              return toast.error('Token Name is required');
-            externalApiMutation.mutate({
-              name: Math.random().toString(36).slice(2, 7),
-            });
-          }}
+          disabled={createTokenMutation.isPending}
+          onClick={generateToken}
         >
-          {externalApiMutation.isPending ? (
+          {createTokenMutation.isPending ? (
             <LoaderCircle className="mr-2 size-4 animate-spin" />
           ) : (
             <NotebookPen className="mr-2 size-4" />
@@ -78,9 +105,9 @@ export default function NotesPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {notes?.map((note) => (
-              <TableRow key={note.id}>
-                <TableCell className="font-medium">{note.title}</TableCell>
+            {tokens?.map((token) => (
+              <TableRow key={token.id}>
+                <TableCell className="font-medium">{token.name}</TableCell>
               </TableRow>
             ))}
           </TableBody>
